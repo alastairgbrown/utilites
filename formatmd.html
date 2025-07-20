@@ -1,0 +1,11 @@
+<textarea id='md'></textarea>
+<button onclick='format()'>format</button>
+<script>
+  function format() {
+    const md = document.getElementById('md').value
+    const cells = md.split('\n').map(l => l.split('|'))
+    const widths = cells[0].map((_,x) => Math.max(...cells.map(r => (r[x] || '').length)))
+
+    document.getElementById('md').value = cells.map((r,y) => r.map((c,x) => c.padEnd(widths[x], y === 1 ? '-' : ' ')).join('|')).join('\n')    
+  }
+</script>
